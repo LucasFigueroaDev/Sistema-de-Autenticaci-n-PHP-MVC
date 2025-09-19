@@ -1,0 +1,78 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.login-box {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 350px;
+}
+
+.login-title h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.login-form,
+.register-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.btn-login {
+    padding: 10px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-login:hover,
+.btn-register:hover {
+    background-color: #0056b3;
+}
+
+.message {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.btn-register {
+    padding: 5px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    font-size: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}

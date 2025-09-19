@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Register - Con PHP</title>
+    <script src="src/js/script.js"></script>
+    <link rel="stylesheet" href="src/css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="login-box">
+            <div class="login-title">
+                <h1>Login</h1>
+            </div>
+            <div class="login-form-container">
+                <form id="form" method="post" class="login-form">
+                    <input type="email" name="email" class="input" placeholder="Email" required>
+                    <input type="password" name="password" class="input" placeholder="Password" required>
+                    <p class="message">Not registered? <button type="button" class="btn-register"
+                            onclick="actionSubmit('rg')">Create an account</button></p>
+                    <button type="submit" class="btn-login" onclick="actionSubmit('lg')">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

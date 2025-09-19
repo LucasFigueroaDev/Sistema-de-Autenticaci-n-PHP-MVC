@@ -1,0 +1,21 @@
+{
+    "name": "lucasfigueroa/login",
+    "description": "Manejo de usuario con php/mysql",
+    "type": "project",
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Lucasfigueroa\\Login\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "LucasFigueroa",
+            "email": "lucasafigueroa93@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}
