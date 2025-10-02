@@ -1,0 +1,13 @@
+# .htaccess
+
+RewriteEngine On
+
+# 1. Necesitas la directiva RewriteBase para decirle a Apache cuál es el subdirectorio.
+#    Asegúrate de que el nombre sea el de tu carpeta: /My-app/
+RewriteBase /My-app/ 
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Ahora, la regla solo reescribe lo que queda, ya que RewriteBase se encarga del prefijo.
+RewriteRule ^(.*)$ index.php [QSA,L]

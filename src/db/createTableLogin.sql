@@ -8,7 +8,7 @@ CREATE TABLE `users`(
     `username` VARCHAR(50) NOT NULL UNIQUE,
     `email` VARCHAR(100) NOT NULL UNIQUE,
     `password` VARCHAR(8) NOT NULL,
-    `role` INT NOT NULL,
+    `role` INT NOT NULL DEFAULT 2,
     `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY(`role`) REFERENCES role(`id`)
 );
