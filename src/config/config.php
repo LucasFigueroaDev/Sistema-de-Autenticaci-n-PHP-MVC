@@ -12,10 +12,13 @@ define('DBHOST', $_ENV['DB_HOST']);
 define('DBUSER', $_ENV['DB_USER']);
 define('DBPASS', $_ENV['DB_PASS']);
 define('DBNAME', $_ENV['DB_NAME']);
+define('ENVIRONMENT', $_ENV['ENVIRONMENT']);
 
+$path = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
+$path = ($path === '/' || $path === '\\') ? '' : $path;
+define('BASE_URL', $path . '/');
 // Ruta para logs
 define('LOG_PATH', __DIR__ . '/../../logs/');
-define('BASE_URL','/My-app/');
 // Crear carpeta de logs si no existe
 if (!file_exists(LOG_PATH)) {
     mkdir(LOG_PATH, 0777, true);
@@ -24,15 +27,19 @@ if (!file_exists(LOG_PATH)) {
 /**
  * Función para abrir conexión a MySQL
  */
-function connection($base = DBNAME)
-{
-    mysqli_report(MYSQLI_REPORT_STRICT);
+function connection($base = DBNAME) {
+    mysqli_report(MYSQLI_REPORT_STRICT | MYSQLI_REPORT_ERROR);
     try {
         $conn = new mysqli(DBHOST, DBUSER, DBPASS, $base);
+        
+        if ($conn->connect_error) {
+            throw new Exception("Error de conexión: " . $conn->connect_error);
+        }
+        
         $conn->set_charset('utf8mb4');
         return $conn;
-    } catch (mysqli_sql_exception $e) {
-        registerLog('error', "Error de conexión: " . $e->getMessage());
+    } catch (Exception $e) {
+        registerLog('error', "Error de conexión a BD: " . $e->getMessage());
         return false;
     }
 }
@@ -64,51 +71,72 @@ function set_session_message($texto, $tipo = 'info', $bg = 'blue')
     ];
 }
 
-function display_modal_message($texto, $tipo = 'info', $bg = 'blue')
-{
-    if (isset($_SESSION['modal_message'])) {
-        $msg = $_SESSION['modal_message'];
-
-        $texto = $msg['texto'];
-        $color = $msg['color'];
-        $bg = $msg['bg'];
-
-        // --- EL CÓDIGO DE TU OVERLAY ORIGINAL AHORA ESTÁ AQUÍ ---
-
-        echo "
-        <div id='overlayMsg' style='
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.4); display: flex; align-items: center;
-            justify-content: center; z-index: 9999;
-        '>
-            <div style=\"
-                background: {$bg};
-                border: 2px solid {$color};
-                padding: 5px 20px;
-                border-radius: 10px;
-                text-align: center;
-                max-width: 400px;
-                box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            \"><p style='font-size: 18px; font-weight: bold; color: #fff'>
-                " . htmlspecialchars($texto) . "</p>
-            </div>
+function display_modal_message($texto = null, $tipo = 'info', $bg = null) {
+    // Si se pasan parámetros directamente, crear el mensaje
+    if ($texto !== null) {
+        $color = match ($tipo) {
+            'success' => 'green',
+            'error' => 'red',
+            'warning' => 'orange',
+            default => 'blue',
+        };
+        
+        $bg = $bg ?? match ($tipo) {
+            'success' => '#10b981',
+            'error' => '#ef4444',
+            'warning' => '#f59e0b',
+            default => '#3b82f6',
+        };
+        
+        $mensaje = [
+            'texto' => $texto,
+            'color' => $color,
+            'bg' => $bg,
+        ];
+    } 
+    // Si no hay parámetros, buscar en sesión
+    elseif (isset($_SESSION['modal_message'])) {
+        $mensaje = $_SESSION['modal_message'];
+        unset($_SESSION['modal_message']); // Limpiar después de obtener
+    } else {
+        return; // No hay mensaje para mostrar
+    }
+    
+    echo "
+    <div id='overlayMsg' style='
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.4); display: flex; align-items: center;
+        justify-content: center; z-index: 9999; cursor: pointer;
+    '>
+        <div style=\"
+            background: {$mensaje['bg']};
+            border: 2px solid {$mensaje['color']};
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 400px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        \">
+            <p style='font-size: 18px; font-weight: bold; color: #fff; margin: 0;'>
+                " . htmlspecialchars($mensaje['texto']) . "
+            </p>
         </div>
+    </div>
 
-        <script>
-            // Haz que el modal desaparezca al hacer click o después de 5 segundos
-            const overlay = document.getElementById('overlayMsg');
+    <script>
+        const overlay = document.getElementById('overlayMsg');
+        if (overlay) {
             overlay.addEventListener('click', function() {
-                this.style.display = 'none';
+                this.remove();
             });
             setTimeout(() => {
-                overlay.style.display = 'none';
-            }, 5000); // Se oculta automáticamente después de 5 segundos
-        </script>
-        ";
-
-        // MUY IMPORTANTE: Limpiar el mensaje después de mostrarlo.
-        unset($_SESSION['modal_message']);
-    }
+                if (overlay.parentNode) {
+                    overlay.remove();
+                }
+            }, 5000);
+        }
+    </script>
+    ";
 }
 
 /**

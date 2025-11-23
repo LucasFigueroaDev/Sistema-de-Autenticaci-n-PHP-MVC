@@ -1,0 +1,108 @@
+
+[2025-11-22 21:38:48] LOGIN EJECUTADO, METHOD=GET | URI=/My-app/login
+[2025-11-22 21:38:58] LOGIN EJECUTADO, METHOD=GET | URI=/My-app/login
+[2025-11-22 21:39:49] Array
+[2025-11-22 21:39:58] Array
+[2025-11-22 21:39:58] Array
+[2025-11-22 21:40:20] 
+[2025-11-22 21:40:43] GET
+[2025-11-22 21:40:46] GET
+[2025-11-22 21:41:21] POST
+[2025-11-22 21:41:21] GET
+[2025-11-22 21:42:07] LOGIN EJECUTADO, METHOD=GET | URI=/My-app/login
+[2025-11-22 21:42:13] LOGIN EJECUTADO, METHOD=POST | URI=/My-app/login
+[2025-11-22 21:42:13] LOGIN EJECUTADO, METHOD=GET | URI=/My-app/login
+[2025-11-22 21:43:36] LOGIN EJECUTADO, METHOD=GET | URI=/My-app/login
+[2025-11-22 21:43:44] LOGIN EJECUTADO, METHOD=POST | URI=/My-app/login
+[2025-11-22 21:43:44] LOGIN EJECUTADO, METHOD=GET | URI=/My-app/login
+[2025-11-22 22:47:08] Ruta solicitada: /My-app/
+[2025-11-22 22:47:08] BASE_URL: /My-app/
+[2025-11-22 22:47:08] SCRIPT_NAME: /My-app/index.php
+[2025-11-22 22:47:08] Ruta solicitada: /My-app/login
+[2025-11-22 22:47:08] BASE_URL: /My-app/
+[2025-11-22 22:47:08] SCRIPT_NAME: /My-app/index.php
+[2025-11-22 22:47:19] Ruta solicitada: /My-app/register
+[2025-11-22 22:47:19] BASE_URL: /My-app/
+[2025-11-22 22:47:19] SCRIPT_NAME: /My-app/index.php
+[2025-11-22 22:47:22] Ruta solicitada: /My-app/login
+[2025-11-22 22:47:22] BASE_URL: /My-app/
+[2025-11-22 22:47:22] SCRIPT_NAME: /My-app/index.php
+[2025-11-22 22:47:27] Ruta solicitada: /My-app/login
+[2025-11-22 22:47:27] BASE_URL: /My-app/
+[2025-11-22 22:47:27] SCRIPT_NAME: /My-app/index.php
+[2025-11-22 22:47:27] Ruta solicitada: /My-app/login
+[2025-11-22 22:47:27] BASE_URL: /My-app/
+[2025-11-22 22:47:27] SCRIPT_NAME: /My-app/index.php
+[2025-11-22 22:47:53] Ruta solicitada: /My-app/login
+[2025-11-22 22:47:53] BASE_URL: /My-app/
+[2025-11-22 22:47:53] SCRIPT_NAME: /My-app/index.php
+[2025-11-22 22:47:53] Ruta solicitada: /My-app/login
+[2025-11-22 22:47:53] BASE_URL: /My-app/
+[2025-11-22 22:47:53] SCRIPT_NAME: /My-app/index.php
+[2025-11-22 22:48:17] Ruta solicitada: /My-app/login
+[2025-11-22 22:48:17] BASE_URL: /My-app/
+[2025-11-22 22:48:17] SCRIPT_NAME: /My-app/index.php
+[2025-11-22 22:48:17] GET
+[2025-11-22 22:48:28] Ruta solicitada: /My-app/login
+[2025-11-22 22:48:28] BASE_URL: /My-app/
+[2025-11-22 22:48:28] SCRIPT_NAME: /My-app/index.php
+[2025-11-22 22:48:28] POST
+[2025-11-22 22:48:28] Ruta solicitada: /My-app/login
+[2025-11-22 22:48:28] BASE_URL: /My-app/
+[2025-11-22 22:48:28] SCRIPT_NAME: /My-app/index.php
+[2025-11-22 22:48:28] GET
+[2025-11-22 22:49:15] Ruta solicitada: /My-app/login
+[2025-11-22 22:49:15] BASE_URL: /My-app/
+[2025-11-22 22:49:15] SCRIPT_NAME: /My-app/index.php
+[2025-11-22 22:49:18] Ruta solicitada: /My-app/
+[2025-11-22 22:49:18] BASE_URL: /My-app/
+[2025-11-22 22:49:18] SCRIPT_NAME: /My-app/index.php
+[2025-11-22 22:49:18] Ruta solicitada: /My-app/login
+[2025-11-22 22:49:18] BASE_URL: /My-app/
+[2025-11-22 22:49:18] SCRIPT_NAME: /My-app/index.php
+[2025-11-22 22:49:23] Ruta solicitada: /My-app/home
+[2025-11-22 22:49:23] BASE_URL: /My-app/
+[2025-11-22 22:49:23] SCRIPT_NAME: /My-app/index.php
+[2025-11-22 22:49:23] Ruta solicitada: /My-app/login
+[2025-11-22 22:49:23] BASE_URL: /My-app/
+[2025-11-22 22:49:23] SCRIPT_NAME: /My-app/index.php
+[2025-11-22 22:52:26] Ruta solicitada: /My-app/login
+[2025-11-22 22:52:26] BASE_URL: /My-app/
+[2025-11-22 22:52:26] SCRIPT_NAME: /My-app/index.php
+[2025-11-22 22:52:31] Ruta solicitada: /My-app/login
+[2025-11-22 22:52:31] BASE_URL: /My-app/
+[2025-11-22 22:52:31] SCRIPT_NAME: /My-app/index.php
+[2025-11-22 22:54:02] Ruta solicitada: /My-app/login
+[2025-11-22 22:54:02] BASE_URL: /My-app/
+[2025-11-22 22:54:02] SCRIPT_NAME: /My-app/index.php
+[2025-11-22 22:54:14] Ruta solicitada: /My-app/login
+[2025-11-22 22:54:14] BASE_URL: /My-app/
+[2025-11-22 22:54:14] SCRIPT_NAME: /My-app/index.php
+[2025-11-22 22:54:24] Ruta solicitada: /My-app/login
+[2025-11-22 22:54:24] BASE_URL: /My-app/
+[2025-11-22 22:54:24] SCRIPT_NAME: /My-app/index.php
+[2025-11-22 22:54:35] Ruta solicitada: /My-app/login
+[2025-11-22 22:54:35] BASE_URL: /My-app/
+[2025-11-22 22:54:35] SCRIPT_NAME: /My-app/index.php
+[2025-11-22 22:54:47] Ruta solicitada: /My-app/register
+[2025-11-22 22:54:47] BASE_URL: /My-app/
+[2025-11-22 22:54:47] SCRIPT_NAME: /My-app/index.php
+[2025-11-22 22:55:02] Ruta solicitada: /My-app/register
+[2025-11-22 22:55:02] BASE_URL: /My-app/
+[2025-11-22 22:55:02] SCRIPT_NAME: /My-app/index.php
+[2025-11-22 22:55:02] Ruta solicitada: /My-app/login
+[2025-11-22 22:55:02] BASE_URL: /My-app/
+[2025-11-22 22:55:02] SCRIPT_NAME: /My-app/index.php
+[2025-11-22 22:55:14] Ruta solicitada: /My-app/login
+[2025-11-22 22:55:14] BASE_URL: /My-app/
+[2025-11-22 22:55:14] SCRIPT_NAME: /My-app/index.php
+[2025-11-22 22:59:08] Email: test2@correo.com
+[2025-11-22 22:59:08] Password ingresada: 12345
+[2025-11-22 22:59:08] Hash en BD: $2y$10$Y
+[2025-11-22 22:59:08] Longitud hash: 8
+[2025-11-22 22:59:08] password_verify result: FALSE
+[2025-11-22 23:02:41] Email: correo@correo.com
+[2025-11-22 23:02:41] Password ingresada: 123456
+[2025-11-22 23:02:41] Hash en BD: $2y$10$NWOT3bprceNXS2sjlhLwe..VtJEh1jUPLk0hTn/TU.PNhG1SqQvQO
+[2025-11-22 23:02:41] Longitud hash: 60
+[2025-11-22 23:02:41] password_verify result: TRUE

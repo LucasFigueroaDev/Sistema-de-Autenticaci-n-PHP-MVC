@@ -1,47 +1,77 @@
 <?php
+date_default_timezone_set('America/Argentina/Buenos_Aires');
 require 'src/config/config.php';
 require 'src/controller/AuthController.php';
-session_start();
 
-$coon = connection();
-if (!$coon) {
-    registerLog('error', 'No se pudo conectar a la base de datos');
-    set_session_message('Error al conectar a la base de datos', 'error', 'red');
-    exit();
+// Configuracion segura de sesión
+$sessionOptions = [
+    'cookie_httponly' => true,
+    'cookie_secure' => (ENVIRONMENT === 'production'),
+    'cookie_samesite' => 'Strict',
+    'use_strict_mode' => true
+];
+session_start($sessionOptions);
+// Manejo de conexión
+try {
+    $conn = connection();
+    if (!$conn) {
+        throw new Exception('No se pudo establecer conexión con la base de datos');
+    }
+} catch (Exception $e) {
+    registerLog('error', 'Error de conexión: ' . $e->getMessage());
+    if (ENVIRONMENT === 'development') {
+        die('Error de base de datos: ' . $e->getMessage());
+    } else {
+        // En producción, mostrar mensaje amigable
+        set_session_message('Error temporal del sistema. Por favor, intente más tarde.', 'error', 'red');
+        // Podrías redirigir a una página de error específica
+        header('Location: ' . BASE_URL . 'login');
+        exit();
+    }
 }
+// Obtener y sanitizar ruta
+$ruta = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$ruta = filter_var($ruta, FILTER_SANITIZE_URL);
+// Remover BASE_URL de la ruta para las comparaciones
+$rutaRelativa = str_replace(BASE_URL, '/', $ruta);
+$rutaRelativa = $rutaRelativa === '' ? '/' : $rutaRelativa;
+$authController = new AuthController($conn);
+// Sistema de enrutamiento mejorado
+switch ($rutaRelativa) {
+    case '/':
+        if (isset($_SESSION['user_id'])) {
+            header('Location: ' . BASE_URL . 'home');
+        } else {
+            header('Location: ' . BASE_URL . 'login');
+        }
+        exit();
 
-$route = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$base_path = '/My-app';
-// 2. Quitamos el prefijo solo si existe (para limpiar la ruta)
-if (str_starts_with($route, $base_path)) {
-    $route = substr($route, strlen($base_path));
-}
-// 3. Si la ruta queda vacía (solo /My-app/), la forzamos a '/'
-if ($route === '') {
-    $route = '/';
-}
-$authController = new AuthController($coon);
-
-switch ($route) {
     case '/login':
         $authController->login();
         break;
+
     case '/register':
         $authController->register();
         break;
+
+    case '/logout':
+        // Limpieza segura de sesión
+        session_regenerate_id(true);
+        session_destroy();
+        header('Location: ' . BASE_URL . 'login');
+        exit();
+
     case '/home':
         if (!isset($_SESSION['user_id'])) {
-            header('Location: /login');
+            header('Location: ' . BASE_URL . 'login');
             exit();
         }
         require 'src/views/home.php';
         break;
-    case '/logout':
-        session_destroy();
-        header('Location: /login');
-        exit();
+
     default:
-        echo 'Ruta no encontrada';
+        http_response_code(404);
+        require 'src/views/404.php';
         break;
 }
-mysqli_close($coon);
+mysqli_close($conn);
