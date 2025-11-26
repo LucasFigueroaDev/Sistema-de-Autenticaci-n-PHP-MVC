@@ -9,23 +9,20 @@ class UserModel
     }
     public function getUserByEmail($email)
     {
-        $sql = 'SELECT id, username, email, password FROM users WHERE email = ?';
+        $sql = 'SELECT * FROM users WHERE email = ? LIMIT 1';
         $result = query($this->conn, $sql, 's', [$email]);
-        if (!$result) {
-            throw new Exception("Error al ejecutar la consulta getUserByEmail()");
-        }
 
-        return $result->num_rows > 0 ? $result->fetch_assoc() : null;
+        if (!$result || $result->num_rows === 0) {
+            return false;
+        }
+        return $result->fetch_assoc();
     }
 
-    public function registerUser($username, $email, $password)
+    public function registerUser($username, $email, $password, $role)
     {
-        $sql = 'INSERT INTO users (username, email, password) VALUES (?, ?, ?)';
-        $result = query($this->conn, $sql, 'sss', [$username, $email, $password]);
-        if (!$result) {
-            throw new Exception("No se pudo registrar el usuario");
-        }
-        return true;
+        $sql = "INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)";
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+        return query($this->conn, $sql, 'sssi', [$username, $email, $hash, $role]);
     }
 
     public function getUserById($id)
@@ -33,9 +30,28 @@ class UserModel
         $sql = 'SELECT * FROM users WHERE id = ?';
         $result = query($this->conn, $sql, 's', [$id]);
         if (!$result) {
-            throw new Exception("Error al ejecutar la consulta getUserById()");
+            return false;
         }
+        return $result->fetch_assoc();
+    }
 
-        return $result->num_rows > 0 ? $result->fetch_assoc() : null;
+    public function getProfileById($id)
+    {
+        $sql = 'SELECT * FROM profile WHERE user_id = ?';
+        $result = query($this->conn, $sql, 'i', [$id]);
+        if (!$result) {
+            return false;
+        }
+        return $result->fetch_assoc();
+    }
+    public function insertProfile($id, $firstname, $lastname, $phone, $address)
+    {
+        $sql = "INSERT INTO profile (user_id, first_name, last_name, phone, address)VALUES (?, ?, ?, ?, ?)";
+        return query($this->conn, $sql, 'issss', [$id, $firstname, $lastname, $phone, $address]);
+    }
+    public function updateProfile($user_id, $firstname, $lastname, $phone, $address)
+    {
+        $sql = "UPDATE profile SET first_name = ?, last_name = ?, phone = ?, address = ? WHERE user_id = $user_id";
+        return query($this->conn, $sql, 'ssss', [$firstname, $lastname, $phone, $address]);
     }
 }

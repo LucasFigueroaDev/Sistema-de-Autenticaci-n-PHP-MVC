@@ -2,6 +2,7 @@
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 require 'src/config/config.php';
 require 'src/controller/AuthController.php';
+require 'src/controller/ProfileController.php';
 
 // Configuracion segura de sesión
 $sessionOptions = [
@@ -36,7 +37,8 @@ $ruta = filter_var($ruta, FILTER_SANITIZE_URL);
 $rutaRelativa = str_replace(BASE_URL, '/', $ruta);
 $rutaRelativa = $rutaRelativa === '' ? '/' : $rutaRelativa;
 $authController = new AuthController($conn);
-// Sistema de enrutamiento mejorado
+$profileControler = new ProfileController($conn);
+// Sistema de enrutamiento
 switch ($rutaRelativa) {
     case '/':
         if (isset($_SESSION['user_id'])) {
@@ -52,6 +54,10 @@ switch ($rutaRelativa) {
 
     case '/register':
         $authController->register();
+        break;
+
+    case '/profile':
+        $profileControler->index();
         break;
 
     case '/logout':
