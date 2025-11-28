@@ -12,7 +12,6 @@ Un sistema de autenticación seguro desarrollado en PHP con arquitectura Model-V
 - **Hashing de contraseñas** con bcrypt
 - **Sistema de logging** para auditoría y debugging
 - **Manejo de variables de entorno** con Dotenv
-- **Interfaz moderna y responsive**
 - **Manejo de errores** profesional
 - **Prepared statements** contra inyección SQL
 
